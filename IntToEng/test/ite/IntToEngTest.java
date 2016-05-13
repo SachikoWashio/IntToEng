@@ -40,4 +40,11 @@ public class IntToEngTest {
 		assertThat(act,is(ex));
 	}
 	
+	@Test
+	public void translateEngで99をninetynineに変換() {
+		IntToEng ite = new IntToEng();
+		String ex = "ninety nine";
+		String act = ite.translateEng(99);
+		assertThat(act,is(ex));
+	}	
 }
