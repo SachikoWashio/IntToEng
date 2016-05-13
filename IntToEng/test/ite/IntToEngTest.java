@@ -23,4 +23,21 @@ public class IntToEngTest {
 		String act = ite.translateEng(19);
 		assertThat(act,is(ex));
 	}
+	
+	@Test
+	public void translateEngで23をtwentythreeに変換() {
+		IntToEng ite = new IntToEng();
+		String ex = "twenty three";
+		String act = ite.translateEng(23);
+		assertThat(act,is(ex));
+	}
+	
+	@Test
+	public void translateEngで20をtwentyに変換() {
+		IntToEng ite = new IntToEng();
+		String ex = "twenty";
+		String act = ite.translateEng(20);
+		assertThat(act,is(ex));
+	}
+	
 }
