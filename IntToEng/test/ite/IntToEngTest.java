@@ -47,4 +47,12 @@ public class IntToEngTest {
 		String act = ite.translateEng(99);
 		assertThat(act,is(ex));
 	}	
+	
+	@Test
+	public void translateEngで100をone_hundredに変換() {
+		IntToEng ite = new IntToEng();
+		String ex = "one hundred";
+		String act = ite.translateEng(100);
+		assertThat(act,is(ex));
+	}	
 }
