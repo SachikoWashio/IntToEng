@@ -12,7 +12,8 @@ public class IntToEng {
 		System.out.println(translateEng(input));
 	}
 
-	static String tryZeroToNinetynine(int n) {
+	
+	static String makeZeroToNinetynine(int n) {
 		// 数値を英訳する変換するメソッド
 		// 0 ~ 19までの数字と20 ~ 99までの数字で分けて処理
 
@@ -25,6 +26,7 @@ public class IntToEng {
 		if (sho == 0 || sho == 1) { // 0から19までの処理
 			String s = num[n];
 			return s;
+			
 		} else { // 20から99までの処理
 			StringBuilder sb = new StringBuilder();
 			sb.append(tenNum[sho - 2]);
@@ -34,22 +36,7 @@ public class IntToEng {
 			return new String(sb);
 		}
 	}
-
-	static String translateEng(int n) {
-		String answer = "";
-		int HUN = n / 100; // 100の位の数字
-		int TEN = n / 10;// 10の位の数字
-		int VALUE = n % 10;// 1の位の数字
-
-		if (HUN == 0) {
-			answer = tryZeroToNinetynine(n);
-		} else {
-			answer = tryOneHundred(n);
-		}
-		return answer;
-	}
-
-	static String tryOneHundred(int n) {
+	static String makeOneHundred(int n) {
 
 		String[] num = makeZeroToNineteen();
 		String[] tenNum = makeTwentyToNinety();
@@ -68,7 +55,7 @@ public class IntToEng {
 				return new String(sb);
 			} else {
 				String s = num[n-100];
-				sb.append(s);
+				sb.append(" "+s);
 				return new String(sb);
 			}
 		} else { // 20から99までの処理
@@ -80,6 +67,50 @@ public class IntToEng {
 			}
 			return new String(sb);
 		}
+	}
+	static String makeOneTHOUSAND(int n) {
+
+		String[] num = makeZeroToNineteen();
+
+		String ans = " ";
+		int THO = n / 1000;
+		int i = n - THO * 1000;
+		int HUN = i / 100; // 100の位の数字
+		int j = i - HUN * 100;
+	
+		String THOUSAND = "thousand";
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append(num[THO] + " " + THOUSAND);// 100 200 300...900
+		if (n % 1000 != 0) {
+			if (HUN != 0) {
+				ans = makeOneHundred(i);
+				sb.append(" " + ans);
+				return new String(sb);
+			} else {
+				ans = makeZeroToNinetynine(j);
+				sb.append(" " + ans);
+				return new String(sb);
+			}
+		} else {
+			return new String(sb);
+		}
+	}
+
+	static String translateEng(int n) {
+		String answer = "";
+		int THO = n / 1000;
+		int HUN = n / 100; // 100の位の数字
+
+		if(THO != 0){
+			answer = makeOneTHOUSAND(n);
+		}else 	if (HUN == 0) {
+			answer = makeZeroToNinetynine(n);
+		} else {
+			answer = makeOneHundred(n);
+		}
+		return answer;
 	}
 
 	// 0から19までの文字列の配列をつくる。
