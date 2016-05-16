@@ -54,5 +54,13 @@ public class IntToEngTest {
 		String ex = "one hundred";
 		String act = ite.translateEng(100);
 		assertThat(act,is(ex));
+	}
+	
+	@Test
+	public void translateEngで222をtwo_hundred_twenty_twoに変換() {
+		IntToEng ite = new IntToEng();
+		String ex = "two hundred twenty two";
+		String act = ite.translateEng(222);
+		assertThat(act,is(ex));
 	}	
 }
